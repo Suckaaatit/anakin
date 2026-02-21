@@ -1,5 +1,14 @@
 # TechSparks GTM Automation
 
+
+
+
+
+<img width="568" height="329" alt="image" src="https://github.com/user-attachments/assets/d6157442-c96c-4ab3-9935-ed0ce45a32c1" />
+
+<img width="274" height="351" alt="image" src="https://github.com/user-attachments/assets/8d54b9cd-86a0-425e-aa05-70758afacbff" />
+
+
 AI-powered GTM automation prototype that converts a TechSparks attendee list into enriched contacts, persona insights, lead routing, and personalized outreach drafts using free tools.
 
 Built as part of a GTM Automation Engineer assignment.
@@ -11,7 +20,6 @@ Built as part of a GTM Automation Engineer assignment.
 This system automates the workflow from raw contact ingestion to outreach draft generation.
 
 **Workflow:**
-
 Public TechSparks Pages  
 → Scraper  
 → Enrichment  
