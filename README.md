@@ -1,359 +1,211 @@
-TechSparks GTM Automation – Assignment Submission
-Objective
+TechSparks GTM Automation
 
-Build a free-tier AI-powered automation prototype that converts a TechSparks attendee/speaker list into enriched contacts, persona context, lead routing, and multi-channel outreach drafts using LLMs and no-code orchestration tools.
+AI-powered GTM automation prototype that converts a TechSparks attendee list into enriched contacts, persona insights, routed leads, and personalized outreach drafts using free tools.
 
-This prototype demonstrates an end-to-end GTM automation workflow from public data ingestion to outreach draft generation and approval.
+Built as part of the GTM Automation Engineer assignment.
 
 Overview
 
-This system implements the complete workflow:
+This system automates the workflow from raw contact ingestion to outreach draft generation.
+
+Workflow:
 
 Public TechSparks Pages
-→ Contact Scraper
-→ Enrichment Engine
-→ AI Persona Generation
-→ Lead Routing and Deduplication
+→ Scraper
+→ Enrichment
+→ Persona Generation (LLM)
+→ Lead Routing + Deduplication
 → Outreach Draft Generation
-→ Make.com No-Code Handoff
-→ Approval Queue
-→ KPI Tracking Support
+→ Make.com Handoff
+→ Approval Queue and Export
 
-All components run using free tools and publicly available data.
+Features
 
-Quick Run
+Scrapes 180 TechSparks contacts from public pages
 
-Run the pipeline:
+Enriches contacts with LinkedIn, seniority, industry, and signals
+
+Generates persona summaries using LLM
+
+Routes leads to SDR, AE, Senior AE, or Partnership
+
+Creates personalized email and LinkedIn outreach drafts
+
+Provides Make.com integration for no-code automation
+
+Includes browser UI for inspection, approval, and export
+
+Supports KPI tracking template
+
+Project Structure
+src/
+  pipeline.py
+  scrape_techsparks_contacts.py
+  persona.py
+  route.py
+  outreach.py
+  web_app.py
+
+data/
+  speakers_raw.csv
+  speakers_enriched.csv
+  speakers_personas.csv
+  speakers_routed.csv
+
+output/
+  outreach_drafts.csv
+  make_handoff.csv
+
+docs/
+  workflow_diagram.md
+  make_scenario_blueprint.json
+Installation
+
+Create virtual environment:
+
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+Run Pipeline
+
+Fast demo run:
 
 python src/pipeline.py --fast
 
-This performs:
-
-scrape TechSparks public pages
-
-enrich contacts
-
-generate personas
-
-route leads
-
-generate outreach drafts
-
-Outputs are written to:
-
-data/
-output/
-Data Source and Contact Volume
-
-Source: Public TechSparks agenda and speaker pages
-Scraper: src/scrape_techsparks_contacts.py
-
-Result:
-
-180 contacts collected
-
-normalized and deduplicated
-
-meets assignment requirement (150–200 contacts)
-
-Stored in:
-
-data/speakers_raw.csv
-Workflow Diagram
-
-Full diagram:
-
-docs/workflow_diagram.md
-
-Pipeline stages:
-
-Scraper
-→ Enrichment
-→ Persona Generation (LLM)
-→ Routing
-→ Outreach Draft Generation
-→ Make.com Handoff
-→ Approval Queue
-Working Prototype Components
-Python Orchestration Pipeline
-
-File:
-
-src/pipeline.py
-
-Stages:
-
-enrich
-
-persona
-
-route
-
-outreach
-
-Handles:
-
-enrichment logic
-
-LLM calls
-
-routing logic
-
-draft generation
-
-output writing
-
-Browser UI
-
-Backend:
-
-src/web_app.py
-
-Frontend:
-
-ui/src/main.ts
-
-UI Features:
-
-run pipeline
-
-inspect each stage
-
-view persona and outreach drafts
-
-approval queue
-
-quality dashboard
-
-export CSV / JSON / XLSX
-
-No-Code Automation Integration
-
-Make.com blueprint:
-
-docs/make_scenario_blueprint.json
-
-Runtime handoff file:
-
-output/make_handoff.csv
-
-Purpose:
-
-enables no-code orchestration
-
-integrates with Google Sheets or outreach tools
-
-demonstrates assignment no-code requirement
-
-Scope 1 – Data Enrichment
-
-Enriched fields:
-
-linkedin_url
-seniority
-industry
-industry_relevance_score
-job_history
-signals
-news_signal
-email_pattern
-enrichment_confidence_score
-evidence_score
-
-Output file:
+This will generate:
 
 data/speakers_enriched.csv
-
-Storage:
-
-CSV files
-
-Make.com handoff file
-
-Google Sheets import pack
-
-Safeguards:
-
-schema validation
-
-enrichment confidence scoring
-
-duplicate detection
-
-Scope 2 – AI Persona and Context Generation
-
-Implemented using LLM.
-
-File:
-
-src/persona.py
-
-Generated fields:
-
-persona_archetype
-persona_summary
-context_summary
-personalization_themes
-relevance_score
-recommended_hook
-assignment_suggestion
-
-Output file:
-
 data/speakers_personas.csv
-
-Hallucination controls:
-
-strict JSON schema validation
-
-retry logic
-
-only uses enriched input data
-
-structured output enforcement
-
-Scope 3 – Outreach Workflow
-
-Generated in:
-
+data/speakers_routed.csv
 output/outreach_drafts.csv
+output/make_handoff.csv
+Data Source
 
-Includes:
+Contacts are scraped from public TechSparks pages.
 
-email_subject_a
-email_subject_b
-email_body_pre_event
-email_body_during_event
-email_body_post_event
-linkedin_note
+Total contacts: 180
 
-Personalization based on:
+Scraper:
 
-persona archetype
+src/scrape_techsparks_contacts.py
+Enrichment
 
-seniority
+Adds:
 
-industry relevance
-
-event session topic
-
-LinkedIn notes limited to under 300 characters.
-
-Scope 4 – Lead Assignment Logic
-
-Implemented in:
-
-src/route.py
-
-Routing categories:
-
-SDR
-AE
-Senior AE
-Partnership
-Duplicate
-Not Relevant
-
-Routing logic uses:
+LinkedIn URL
 
 seniority
 
-persona relevance score
+industry
+
+signals
 
 enrichment confidence score
 
-event role
+Output:
 
-industry relevance
+data/speakers_enriched.csv
+Persona Generation
 
-Duplicate prevention implemented using:
+Uses LLM to generate:
 
-LinkedIn URL match
+persona archetype
 
-fuzzy matching fallback
+summary
+
+personalization themes
+
+relevance score
+
+Output:
+
+data/speakers_personas.csv
+Lead Routing
+
+Routes contacts into:
+
+SDR
+
+AE
+
+Senior AE
+
+Partnership
+
+Duplicate
+
+Not Relevant
 
 Output:
 
 data/speakers_routed.csv
-Scope 5 – Failure and Scale Handling
+Outreach Draft Generation
 
-Implemented handling:
+Generates:
 
-Missing LinkedIn profile
+Email subject lines
 
-enrichment confidence lowered
+Pre-event email
 
-pipeline continues
+During-event email
 
-Low-confidence persona
+Post-event email
 
-routed to manual review path
+LinkedIn note
 
-Duplicate contacts
+Output:
 
-detected and suppressed
+output/outreach_drafts.csv
+No-Code Automation
 
-marked as duplicate
+Make.com integration file:
 
-Scaling from 200 to 2,000 contacts
+docs/make_scenario_blueprint.json
 
-Design supports scaling via:
+Export file for automation:
 
-cached enrichment
+output/make_handoff.csv
+UI
 
-batch processing
+Browser UI allows:
 
-queue-based orchestration using Make.com
+Run pipeline
 
-KPI Tracking Support
+Inspect enrichment, persona, routing, outreach
 
-Campaign tracking template:
+Approve or reject outreach drafts
+
+Export data
+
+Backend:
+
+src/web_app.py
+KPI Tracking
+
+Template included:
 
 data/campaign_tracking_template.csv
 
 Supports tracking:
 
-email delivery status
+email delivery
 
-LinkedIn connection outcome
+LinkedIn acceptance
 
-response status
+outreach outcomes
 
-Observed metrics populate automatically when outreach is executed via Make.com or email platform.
+Tools Used
 
-Outputs Generated
-data/speakers_raw.csv
-data/speakers_enriched.csv
-data/speakers_personas.csv
-data/speakers_routed.csv
+Python
 
-output/outreach_drafts.csv
-output/make_handoff.csv
-No-Code Workflow Support
+pandas
 
-Make.com integration artifact:
+Mistral LLM
 
-docs/make_scenario_blueprint.json
+requests
 
-Sheet import pack:
+Make.com (free tier)
 
-output/sheets/
+Flask
 
-Purpose:
-
-connect pipeline to no-code workflow
-
-enable orchestration and approval workflows
-
-Tools Used and Rationale
-Tool	Purpose
-Python	orchestration pipeline
-pandas	data processing
-Mistral LLM	persona and outreach generation
-requests	enrichment and scraping
-Make.com	no-code orchestration
-Flask	backend API
-TypeScript + Vite	browser UI
-Google Sheets	optional system of record
-
-All tools used are free-tier compatible.
+TypeScript
