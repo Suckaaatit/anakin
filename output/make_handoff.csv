@@ -1,0 +1,24 @@
+﻿id,name,title,company,seniority,industry,relevance_score,final_route,outreach_sequence,account_priority_score
+1,Shradha Sharma,Founder & CEO,YourStory & The Bharat Project,C-Suite / Founder,other_tech,75,Senior AE,VIP_SEQUENCE_POST_EVENT,97
+2,Sangeeta Bavi,COO,YourStory,C-Suite / Founder,other_tech,75,Senior AE,VIP_SEQUENCE_POST_EVENT,97
+10,Hemant Gala,CEO,PhonePe Lending,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+11,Madhusudhan Rao,CTO,Swiggy,C-Suite / Founder,foodtech,88,Senior AE,VIP_SEQUENCE_POST_EVENT,105
+12,Mohit Saxena,Co-founder & CTO,Inmobi,C-Suite / Founder,other_tech,75,Senior AE,VIP_SEQUENCE_POST_EVENT,97
+22,Vishal Gupta,CEO,PhonePe Insurance,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+28,Ajeesh Achuthan,Co-founder & CTO,Open Financial Technologies,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+37,Ananth Narayanan,Founder & CEO,BRND.ME (formerly Mensa Brands),C-Suite / Founder,ecommerce_d2c,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+38,Ananth Narayanan,Founder & CEO,Mensa Brands,C-Suite / Founder,ecommerce_d2c,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+43,Anirudh Sharma,Co-founder & CEO,Digantara,C-Suite / Founder,other_tech,75,Senior AE,VIP_SEQUENCE_POST_EVENT,97
+44,Anish Achuthan,Co-founder & CEO,Open Financial Technologies,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,120
+55,Arpit Chug,Chief Financial Officer,Razorpay,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+67,Bhavish Aggarwal,Founder,Ola,C-Suite / Founder,mobility_ev,85,Senior AE,VIP_SEQUENCE_POST_EVENT,100
+74,Deena Jacob,Co-founder & CFO,Open Financial Technologies,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+90,Gaurav Hinduja,Co-Founder,axio,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+94,Harshil Mathur,Co-founder & CEO,Razorpay,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+120,Kunal Bahl,Co-founder,Snapdeal & Titan Capital,C-Suite / Founder,ecommerce_d2c,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+127,Mabel Chacko,Co-founder & COO,Open Financial Technologies,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+151,Nithin Kamath,Founder & CEO,Zerodha & Rainmatter,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+155,Patanjali Somayaji,CTO,AXIO,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+158,Phani Kishan Addepalli,Co-founder & CGO,Swiggy,C-Suite / Founder,foodtech,85,Senior AE,VIP_SEQUENCE_POST_EVENT,100
+175,Rahul Chari,Founder & CTO,PhonePe,C-Suite / Founder,fintech,100,Senior AE,VIP_SEQUENCE_POST_EVENT,116
+178,Rajan Anandan,Managing Director,Peak XV & Surge,C-Suite / Founder,venture_capital,95,Senior AE,VIP_SEQUENCE_POST_EVENT,114

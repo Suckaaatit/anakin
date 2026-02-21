@@ -1,0 +1,39 @@
+# Environment — never commit API keys
+.env
+
+# Cache/runtime data
+.venv/
+.pytest_cache/
+data/cache/
+data/test/
+output/test/
+data/app_state.db
+data/run_history.json
+data/errors.log
+data/ui_runtime.log
+data/web_app.log
+data/web_app.err.log
+data/web_app_runtime.log
+data/*.html
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Frontend build/deps
+ui/node_modules/
+ui/dist/
+ui/*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

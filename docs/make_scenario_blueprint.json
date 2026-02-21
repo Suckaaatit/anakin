@@ -1,0 +1,150 @@
+{
+  "name": "TechSparks Persona Automation (429 Recovery Blueprint)",
+  "platform": "Make.com",
+  "version": "1.1",
+  "notes": [
+    "This template is tuned for intermittent Mistral 429 responses.",
+    "Process one row at a time and back off before retry.",
+    "Replace placeholder connection IDs and spreadsheet IDs before import."
+  ],
+  "modules": [
+    {
+      "id": 1,
+      "type": "google-sheets:searchRows",
+      "name": "Search Pending Rows",
+      "config": {
+        "spreadsheet_id": "{{SPREADSHEET_ID}}",
+        "sheet": "make_demo_input",
+        "search_method": "search",
+        "filter": "make_status = 'PENDING' AND final_route in ('Senior AE','AE')",
+        "sort_order": "asc",
+        "limit": 1,
+        "column_range": "A1:R1",
+        "table_contains_headers": true
+      }
+    },
+    {
+      "id": 2,
+      "type": "tools:sleep",
+      "name": "Sleep 10s Before HTTP",
+      "config": {
+        "seconds": 10
+      }
+    },
+    {
+      "id": 3,
+      "type": "http:request",
+      "name": "Mistral Persona API Call",
+      "config": {
+        "method": "POST",
+        "url": "https://api.mistral.ai/v1/chat/completions",
+        "headers": {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer {{MISTRAL_API_KEY}}"
+        },
+        "parse_response": true,
+        "return_error_if_http_request_fails": true,
+        "body": {
+          "model": "mistral-small-latest",
+          "temperature": 0,
+          "max_tokens": 180,
+          "response_format": {
+            "type": "json_object"
+          },
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return only valid JSON. Never mention Anakin."
+            },
+            {
+              "role": "user",
+              "content": "Name: {{1.name}}\nTitle: {{1.title}}\nCompany: {{1.company}}\nSeniority: {{1.seniority}}\nIndustry: {{1.industry}}\nSession Topic: {{1.session_topic}}\nGenerate JSON with keys: persona_summary, context_summary, personalization_themes, recommended_hook."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": "json:parse",
+      "name": "Parse Persona JSON",
+      "config": {
+        "data_structure": "PersonaOutput",
+        "json_string": "{{trim(replace(replace(get(parseJSON(3.data);'choices[1].message.content');'```json';'');'```';''))}}"
+      }
+    },
+    {
+      "id": 5,
+      "type": "google-sheets:updateRow",
+      "name": "Write Persona Fields (SUCCESS)",
+      "config": {
+        "spreadsheet_id": "{{SPREADSHEET_ID}}",
+        "sheet": "make_demo_input",
+        "row_number": "{{1.row_number}}",
+        "values": {
+          "id": "{{1.id}}",
+          "name": "{{1.name}}",
+          "title": "{{1.title}}",
+          "company": "{{1.company}}",
+          "seniority": "{{1.seniority}}",
+          "industry": "{{1.industry}}",
+          "session_topic": "{{1.session_topic}}",
+          "relevance_score": "{{1.relevance_score}}",
+          "final_route": "{{1.final_route}}",
+          "outreach_sequence": "{{1.outreach_sequence}}",
+          "account_priority_score": "{{1.account_priority_score}}",
+          "persona_summary": "{{4.persona_summary}}",
+          "context_summary": "{{4.context_summary}}",
+          "personalization_themes": "{{join(4.personalization_themes; '|')}}",
+          "recommended_hook": "{{4.recommended_hook}}",
+          "make_status": "SUCCESS",
+          "last_run_at": "{{formatDate(now; 'YYYY-MM-DD HH:mm:ss')}}",
+          "error_message": ""
+        }
+      }
+    }
+  ],
+  "error_handler": {
+    "source_module_id": 3,
+    "route": [
+      {
+        "id": "eh1",
+        "type": "tools:sleep",
+        "name": "Backoff Sleep 25s",
+        "config": {
+          "seconds": 25
+        }
+      },
+      {
+        "id": "eh2",
+        "type": "google-sheets:updateRow",
+        "name": "Mark Row PENDING For Retry",
+        "config": {
+          "spreadsheet_id": "{{SPREADSHEET_ID}}",
+          "sheet": "make_demo_input",
+          "row_number": "{{1.row_number}}",
+          "values": {
+            "id": "{{1.id}}",
+            "name": "{{1.name}}",
+            "title": "{{1.title}}",
+            "company": "{{1.company}}",
+            "seniority": "{{1.seniority}}",
+            "industry": "{{1.industry}}",
+            "session_topic": "{{1.session_topic}}",
+            "relevance_score": "{{1.relevance_score}}",
+            "final_route": "{{1.final_route}}",
+            "outreach_sequence": "{{1.outreach_sequence}}",
+            "account_priority_score": "{{1.account_priority_score}}",
+            "persona_summary": "{{1.persona_summary}}",
+            "context_summary": "{{1.context_summary}}",
+            "personalization_themes": "{{1.personalization_themes}}",
+            "recommended_hook": "{{1.recommended_hook}}",
+            "make_status": "PENDING",
+            "last_run_at": "{{formatDate(now; 'YYYY-MM-DD HH:mm:ss')}}",
+            "error_message": "RATE_LIMIT_429"
+          }
+        }
+      }
+    ]
+  }
+}

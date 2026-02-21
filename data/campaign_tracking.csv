@@ -1,0 +1,6 @@
+contact_id,email_sent,email_delivered,email_bounced,linkedin_sent,linkedin_accepted,email_replied,reply_label,sent_at,replied_at,notes
+sample_1,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,,2026-02-21T09:00:00+05:30,,Manual sample test
+sample_2,TRUE,FALSE,TRUE,TRUE,FALSE,FALSE,,2026-02-21T09:05:00+05:30,,Manual sample test
+sample_3,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,,2026-02-21T09:10:00+05:30,,Manual sample test
+sample_4,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,,2026-02-21T09:15:00+05:30,,Manual sample test
+sample_5,TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,,2026-02-21T09:20:00+05:30,,Manual sample test

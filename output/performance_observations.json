@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-02-21T09:15:49+05:30",
+  "sample_size": {
+    "enriched_contacts": 180,
+    "persona_rows": 180,
+    "routed_rows": 180,
+    "outreach_rows": 180,
+    "drafts_generated": 31
+  },
+  "routing": {
+    "distribution": {
+      "SDR": 132,
+      "Not Relevant": 24,
+      "Senior AE": 23,
+      "DUPLICATE": 1
+    },
+    "duplicates_flagged": 1
+  },
+  "email_deliverability": {
+    "measurement_mode": "observed",
+    "observed": {
+      "sent": 5,
+      "delivered": 4,
+      "deliverability_rate_pct": 80.0,
+      "notes": "Observed from campaign tracking CSV."
+    },
+    "readiness_signals": {
+      "email_pattern_available_pct": 100.0,
+      "subject_rules_pass_pct": 100.0,
+      "yc_intro_line_pass_pct": 100.0,
+      "forbidden_term_violations": 0
+    },
+    "assignment_rate_pct": 80.0
+  },
+  "linkedin_acceptance": {
+    "measurement_mode": "observed",
+    "observed": {
+      "requests_sent": 5,
+      "accepted": 3,
+      "acceptance_rate_pct": 60.0,
+      "notes": "Observed from campaign tracking CSV."
+    },
+    "readiness_signals": {
+      "notes_under_300_chars_pct": 100.0,
+      "topic_personalization_pct": 100.0,
+      "forbidden_term_violations": 0
+    },
+    "assignment_rate_pct": 60.0
+  },
+  "message_customization": {
+    "measurement_mode": "draft_content_analysis",
+    "name_mention_pct": 100.0,
+    "company_mention_pct": 100.0,
+    "session_topic_mention_pct": 100.0,
+    "subject_unique_rate_pct": 12.9,
+    "persona_theme_nonempty_pct": 100.0,
+    "customization_depth_score_pct": 82.58
+  },
+  "assignment_metrics": {
+    "email_deliverability_rate_pct": 80.0,
+    "email_deliverability_measurement_mode": "observed",
+    "linkedin_acceptance_rate_pct": 60.0,
+    "linkedin_acceptance_measurement_mode": "observed",
+    "expected_acceptance_rate_pct": 60.0,
+    "send_readiness_score_pct": 100.0,
+    "spam_risk_score_pct": 0.0
+  },
+  "notes": [
+    "Observed deliverability and acceptance require campaign_tracking.csv with real send outcomes.",
+    "Send outcomes are not reported until email_sent/linkedin_sent are logged in campaign_tracking.csv."
+  ]
+}

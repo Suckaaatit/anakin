@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechSparks GTM Control Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Sora:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+
+    <main class="shell">
+      <header class="hero panel">
+        <div>
+          <p class="kicker">TechSparks 2025</p>
+          <h1>GTM Pipeline Control Room</h1>
+          <p class="subline">
+            Run the enrichment stack, inspect quality, and review outreach drafts with approval workflow.
+          </p>
+        </div>
+        <div class="status-stack">
+          <span id="run-status" class="status-pill idle">IDLE</span>
+          <p id="run-meta" class="mono">No pipeline run yet.</p>
+        </div>
+      </header>
+
+      <section class="panel controls">
+        <div class="control-row">
+          <label for="from-stage">Start from stage</label>
+          <select id="from-stage">
+            <option value="">From beginning</option>
+            <option value="enrich">enrich</option>
+            <option value="persona">persona</option>
+            <option value="route">route</option>
+            <option value="outreach">outreach</option>
+          </select>
+        </div>
+        <div class="control-row">
+          <label class="checkbox-row" for="fast-mode">
+            <input id="fast-mode" type="checkbox" />
+            Compliance Mode (recommended)
+          </label>
+        </div>
+        <div class="control-row">
+          <label for="api-token">Control Token (optional)</label>
+          <input id="api-token" type="password" placeholder="Set WEB_APP_TOKEN token if enabled" />
+        </div>
+        <div class="button-row">
+          <button id="run-full" class="btn btn-primary">Run Full</button>
+          <button id="run-stop" class="btn btn-danger">Stop</button>
+          <button id="refresh-all" class="btn btn-ghost">Refresh</button>
+        </div>
+        <p id="flash-message" class="mono flash"></p>
+      </section>
+
+      <section class="metrics-grid">
+        <article class="panel metric stage-card" data-stage="enrich">
+          <p class="metric-label">Raw Contacts</p>
+          <p id="count-raw" class="metric-value">0000</p>
+        </article>
+        <article class="panel metric stage-card" data-stage="enrich">
+          <p class="metric-label">Enriched</p>
+          <p id="count-enriched" class="metric-value">0000</p>
+        </article>
+        <article class="panel metric stage-card" data-stage="persona">
+          <p class="metric-label">Personas</p>
+          <p id="count-personas" class="metric-value">0000</p>
+        </article>
+        <article class="panel metric stage-card" data-stage="route">
+          <p class="metric-label">Routed</p>
+          <p id="count-routed" class="metric-value">0000</p>
+        </article>
+        <article class="panel metric stage-card" data-stage="outreach">
+          <p class="metric-label">Outreach</p>
+          <p id="count-outreach" class="metric-value">0000</p>
+        </article>
+      </section>
+
+      <section class="split-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Compliance</h2>
+          </div>
+          <div id="compliance-list" class="chip-row"></div>
+        </article>
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Warnings</h2>
+          </div>
+          <ul id="warnings-list" class="warning-list">
+            <li class="mono">No warnings yet.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header panel-header-wrap">
+          <h2>Stage Inspector</h2>
+          <div class="inline-controls">
+            <button class="btn btn-ghost stage-inspect-btn" data-stage="enrich">Inspect enrich</button>
+            <button class="btn btn-ghost stage-inspect-btn" data-stage="persona">Inspect persona</button>
+            <button class="btn btn-ghost stage-inspect-btn" data-stage="route">Inspect route</button>
+            <button class="btn btn-ghost stage-inspect-btn" data-stage="outreach">Inspect outreach</button>
+          </div>
+        </div>
+        <p id="stage-inspector-hint" class="mono">Click any stage to inspect passed/failed samples, logs, and config.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header panel-header-wrap">
+          <h2>Quality Dashboard</h2>
+          <button id="quality-refresh" class="btn btn-ghost">Refresh Quality</button>
+        </div>
+        <div class="quality-grid">
+          <article class="quality-card">
+            <h3>Route Distribution</h3>
+            <div id="chart-route" class="chart-bars"></div>
+          </article>
+          <article class="quality-card">
+            <h3>Enrichment Coverage</h3>
+            <div id="chart-kpi" class="chart-bars"></div>
+          </article>
+          <article class="quality-card">
+            <h3>Confidence + Persona Quality</h3>
+            <div id="chart-trend" class="chart-line"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header panel-header-wrap">
+          <h2>Outreach Approval Queue</h2>
+          <div class="inline-controls">
+            <label for="queue-filter">Filter</label>
+            <select id="queue-filter">
+              <option value="pending">pending</option>
+              <option value="approved">approved</option>
+              <option value="rejected">rejected</option>
+              <option value="non_queueable">not queueable</option>
+              <option value="all">all</option>
+            </select>
+            <button id="queue-refresh" class="btn btn-ghost">Refresh Queue</button>
+          </div>
+        </div>
+        <div class="chip-row queue-counts">
+          <span id="queue-pending" class="chip chip-warn">Pending: 0</span>
+          <span id="queue-approved" class="chip chip-ok">Approved: 0</span>
+          <span id="queue-rejected" class="chip chip-fail">Rejected: 0</span>
+          <span id="queue-non-queueable" class="chip">Not Queueable: 0</span>
+        </div>
+        <p id="queue-note" class="mono chart-note">Not Queueable = skipped by routing guardrails (not relevant, duplicate, or low-confidence manual-review path).</p>
+        <div id="queue-table" class="table-wrap"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Run Log</h2>
+          <p id="last-updated" class="mono">Waiting for updates...</p>
+        </div>
+        <pre id="log-output" class="log-box mono">No log lines yet.</pre>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header panel-header-wrap">
+          <h2>Dataset Preview</h2>
+          <div class="inline-controls">
+            <label for="preview-dataset">File</label>
+            <select id="preview-dataset">
+              <option value="raw">raw</option>
+              <option value="enriched">enriched</option>
+              <option value="personas">personas</option>
+              <option value="routed">routed</option>
+              <option value="outreach">outreach</option>
+            </select>
+            <select id="preview-format">
+              <option value="csv">csv</option>
+              <option value="json">json</option>
+              <option value="xlsx">xlsx</option>
+            </select>
+            <button id="preview-refresh" class="btn btn-ghost">Load</button>
+            <button id="preview-download" class="btn btn-secondary">Download</button>
+          </div>
+        </div>
+        <div id="preview-meta" class="mono table-meta"></div>
+        <div id="preview-table" class="table-wrap"></div>
+      </section>
+    </main>
+
+    <div id="stage-modal" class="modal hidden">
+      <div class="modal-card">
+        <div class="panel-header panel-header-wrap">
+          <h2 id="stage-modal-title">Stage Inspector</h2>
+          <button id="stage-modal-close" class="btn btn-danger">Close</button>
+        </div>
+        <p id="stage-modal-meta" class="mono"></p>
+        <div class="tab-row">
+          <button id="tab-passed" class="btn btn-ghost tab-btn active">Passed</button>
+          <button id="tab-failed" class="btn btn-ghost tab-btn">Failed</button>
+          <button id="tab-logs" class="btn btn-ghost tab-btn">Logs</button>
+          <button id="tab-config" class="btn btn-ghost tab-btn">Config</button>
+        </div>
+        <div id="stage-tab-content" class="modal-content"></div>
+      </div>
+    </div>
+
+    <div id="drawer-backdrop" class="drawer-backdrop hidden"></div>
+    <aside id="outreach-drawer" class="drawer hidden">
+      <div class="panel-header panel-header-wrap">
+        <h2 id="drawer-title">Outreach Preview</h2>
+        <button id="drawer-close" class="btn btn-danger">Close</button>
+      </div>
+      <div id="drawer-content">
+        <p class="mono">Select a queue row to preview outreach draft content.</p>
+      </div>
+    </aside>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
