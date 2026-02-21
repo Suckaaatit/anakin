@@ -1,43 +1,44 @@
-TechSparks GTM Automation
+# TechSparks GTM Automation
 
-AI-powered GTM automation prototype that converts a TechSparks attendee list into enriched contacts, persona insights, routed leads, and personalized outreach drafts using free tools.
+AI-powered GTM automation prototype that converts a TechSparks attendee list into enriched contacts, persona insights, lead routing, and personalized outreach drafts using free tools.
 
-Built as part of the GTM Automation Engineer assignment.
+Built as part of a GTM Automation Engineer assignment.
 
-Overview
+---
+
+# Overview
 
 This system automates the workflow from raw contact ingestion to outreach draft generation.
 
-Workflow:
+**Workflow:**
 
-Public TechSparks Pages
-→ Scraper
-→ Enrichment
-→ Persona Generation (LLM)
-→ Lead Routing + Deduplication
-→ Outreach Draft Generation
-→ Make.com Handoff
-→ Approval Queue and Export
+Public TechSparks Pages  
+→ Scraper  
+→ Enrichment  
+→ Persona Generation (LLM)  
+→ Lead Routing + Deduplication  
+→ Outreach Draft Generation  
+→ Make.com Handoff  
+→ Approval Queue and Export  
 
-Features
+---
 
-Scrapes 180 TechSparks contacts from public pages
+# Features
 
-Enriches contacts with LinkedIn, seniority, industry, and signals
+- Scrapes 180 TechSparks contacts from public pages  
+- Enriches contacts with LinkedIn, seniority, industry, and signals  
+- Generates persona summaries using LLM  
+- Routes leads to SDR, AE, Senior AE, or Partnership  
+- Creates personalized email and LinkedIn outreach drafts  
+- Provides Make.com integration for no-code automation  
+- Includes browser UI for inspection, approval, and export  
+- Includes KPI tracking template  
 
-Generates persona summaries using LLM
+---
 
-Routes leads to SDR, AE, Senior AE, or Partnership
+# Project Structure
 
-Creates personalized email and LinkedIn outreach drafts
-
-Provides Make.com integration for no-code automation
-
-Includes browser UI for inspection, approval, and export
-
-Supports KPI tracking template
-
-Project Structure
+```
 src/
   pipeline.py
   scrape_techsparks_contacts.py
@@ -59,153 +60,195 @@ output/
 docs/
   workflow_diagram.md
   make_scenario_blueprint.json
-Installation
+```
+
+---
+
+# Installation
 
 Create virtual environment:
 
+```bash
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
-Run Pipeline
+```
+
+---
+
+# Run Pipeline
 
 Fast demo run:
 
+```bash
 python src/pipeline.py --fast
+```
 
-This will generate:
+This generates:
 
+```
 data/speakers_enriched.csv
 data/speakers_personas.csv
 data/speakers_routed.csv
 output/outreach_drafts.csv
 output/make_handoff.csv
-Data Source
+```
+
+---
+
+# Data Source
 
 Contacts are scraped from public TechSparks pages.
 
-Total contacts: 180
+Total contacts: **180**
 
 Scraper:
 
+```
 src/scrape_techsparks_contacts.py
-Enrichment
+```
+
+---
+
+# Enrichment
 
 Adds:
 
-LinkedIn URL
-
-seniority
-
-industry
-
-signals
-
-enrichment confidence score
+- LinkedIn URL  
+- seniority  
+- industry  
+- signals  
+- enrichment confidence score  
 
 Output:
 
+```
 data/speakers_enriched.csv
-Persona Generation
+```
+
+---
+
+# Persona Generation
 
 Uses LLM to generate:
 
-persona archetype
-
-summary
-
-personalization themes
-
-relevance score
+- persona archetype  
+- persona summary  
+- personalization themes  
+- relevance score  
 
 Output:
 
+```
 data/speakers_personas.csv
-Lead Routing
+```
+
+---
+
+# Lead Routing
 
 Routes contacts into:
 
-SDR
-
-AE
-
-Senior AE
-
-Partnership
-
-Duplicate
-
-Not Relevant
+- SDR  
+- AE  
+- Senior AE  
+- Partnership  
+- Duplicate  
+- Not Relevant  
 
 Output:
 
+```
 data/speakers_routed.csv
-Outreach Draft Generation
+```
+
+---
+
+# Outreach Draft Generation
 
 Generates:
 
-Email subject lines
-
-Pre-event email
-
-During-event email
-
-Post-event email
-
-LinkedIn note
+- Email subject lines  
+- Pre-event email  
+- During-event email  
+- Post-event email  
+- LinkedIn note  
 
 Output:
 
+```
 output/outreach_drafts.csv
-No-Code Automation
+```
 
-Make.com integration file:
+---
 
+# No-Code Automation
+
+Make.com integration blueprint:
+
+```
 docs/make_scenario_blueprint.json
+```
 
 Export file for automation:
 
+```
 output/make_handoff.csv
-UI
+```
+
+---
+
+# UI
 
 Browser UI allows:
 
-Run pipeline
-
-Inspect enrichment, persona, routing, outreach
-
-Approve or reject outreach drafts
-
-Export data
+- Run pipeline  
+- Inspect enrichment, persona, routing, outreach  
+- Approve or reject outreach drafts  
+- Export CSV/JSON/XLSX  
 
 Backend:
 
+```
 src/web_app.py
-KPI Tracking
+```
 
-Template included:
+---
 
+# KPI Tracking
+
+Tracking template:
+
+```
 data/campaign_tracking_template.csv
+```
 
 Supports tracking:
 
-email delivery
+- email delivery  
+- LinkedIn acceptance  
+- outreach outcomes  
 
-LinkedIn acceptance
+---
 
-outreach outcomes
+# Tools Used
 
-Tools Used
+- Python  
+- pandas  
+- Mistral LLM  
+- requests  
+- Make.com (free tier)  
+- Flask  
+- TypeScript  
 
-Python
+---
 
-pandas
+# Limitations
 
-Mistral LLM
+This prototype generates outreach drafts but does not send emails or LinkedIn messages.
 
-requests
+---
 
-Make.com (free tier)
+# Summary
 
-Flask
-
-TypeScript
+This project demonstrates an end-to-end AI-assisted GTM automation pipeline using public data, LLM-based personalization, intelligent routing, and no-code automation integration.
