@@ -260,9 +260,7 @@ Supports tracking:
 
 ---
 
-# Limitations
 
-This prototype generates outreach drafts but does not send emails or LinkedIn messages.
 
 ---
 
