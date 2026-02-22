@@ -1,6 +1,15 @@
 # TechSparks GTM Automation
 
 
+<img width="853" height="427" alt="image" src="https://github.com/user-attachments/assets/8bbcc4b2-3252-4684-b1fb-bf3cf36c5e59" />
+
+<img width="839" height="397" alt="image" src="https://github.com/user-attachments/assets/9bfd7e26-201e-4472-830d-1fefaddf037c" />
+
+<img width="832" height="409" alt="image" src="https://github.com/user-attachments/assets/2c83ced5-fce8-45b9-8c2d-7882535baeb3" />
+
+
+<img width="853" height="290" alt="image" src="https://github.com/user-attachments/assets/330ddf0c-d00c-4815-9b14-6184dd9a3172" />
+
 
 
 
